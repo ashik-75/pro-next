@@ -32,20 +32,15 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${nunito.variable} ${openSans.variable} font-inter`}
     >
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <body className="h-full dark:bg-gray-900">
+      <body className="h-full dark:bg-gray-900">
+        <ThemeProvider>
           <nav className="fixed left-0 top-0 z-10 h-20 w-full overflow-hidden border-b dark:border-neutral-700">
             <Navbar />
           </nav>
 
           <main className="h-full pt-20">{children}</main>
-        </body>
-      </ThemeProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -20,7 +20,7 @@ const Navbar = () => {
         onClick={() =>
           theme === "dark" ? setTheme("light") : setTheme("dark")
         }
-        className="border border-dashed p-2"
+        className="rounded-full border border-dashed border-zinc-500 p-2 dark:border-zinc-300"
       >
         {theme === "light" ? <Sun /> : <Moon />}
       </button>
