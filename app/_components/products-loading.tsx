@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 
-const CharacterLoading = () => {
+const ProductsLoading = () => {
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4">
       {Array.from({ length: 10 }).map((_, i) => (
@@ -17,4 +17,4 @@ const CharacterLoading = () => {
   );
 };
 
-export default CharacterLoading;
+export default ProductsLoading;

@@ -10,10 +10,7 @@ const Navbar = () => {
   return (
     <div className=" flex h-full items-center justify-between px-10 backdrop-blur-sm">
       <Link href={"/"}>
-        <h1 className="font-nunito text-3xl font-extrabold">
-          <span className="text-rose-600">Cool</span>
-          <span>Stuff</span>
-        </h1>
+        <h1 className=" text-3xl font-extrabold">Store Front</h1>
       </Link>
 
       <button
