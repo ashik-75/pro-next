@@ -14,18 +14,13 @@ const InfiniteLoading = ({
   query,
 }: {
   payload: ProductResponse;
-  url?: string;
+  url: string;
   query: { [key: string]: string };
 }) => {
+  const [data, setData] = useState<ProductResponse>(payload);
   const themeResponse = useTheme();
   const ref = useRef(null);
   const visible = useInVisible(ref);
-
-  if (!url) {
-    return null;
-  }
-
-  const [data, setData] = useState<ProductResponse>(payload);
 
   useEffect(() => {
     if (visible) {
@@ -42,9 +37,7 @@ const InfiniteLoading = ({
         });
       });
     }
-  }, [visible]);
-
-  console.log({ data });
+  }, [visible, url, query, data]);
 
   return (
     <>
