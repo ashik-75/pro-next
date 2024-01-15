@@ -23,12 +23,12 @@ const SearchBar = () => {
       q: value,
       category: categoryQuery,
     });
-    startTransition(() => router.push(`?${query}`));
+    startTransition(() => router.push(`/store/search?${query}`));
   }, 1000);
 
   return (
     <div className="flex max-w-md gap-5 rounded-3xl border px-4 py-2">
-      {!isPending && <Search />}
+      {!isPending && <Search className="opacity-60" />}
       {isPending && <Loader className="animate-spin" />}
 
       <input

@@ -4,7 +4,6 @@ import ProductCard from "./product";
 import { Product } from "@/lib/types";
 
 const ProductList = ({ products }: { products: Product[] | undefined }) => {
-  // console.log(products);
   if (!products || products.length === 0) {
     return <div>Uff, nothing found</div>;
   }

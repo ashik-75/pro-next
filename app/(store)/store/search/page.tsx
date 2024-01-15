@@ -1,4 +1,3 @@
-import ProductList from "@/app/_components/product-list";
 import ProductsLoading from "@/app/_components/products-loading";
 import { fetchData } from "@/lib/data";
 import { ProductResponse } from "@/lib/types";
@@ -6,26 +5,35 @@ import { Await } from "@/lib/utils";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import React, { Suspense } from "react";
+import InfiniteLoading from "../../_components/infinite-loading";
 
-const PageCategoryProducts = ({ params }: { params: { category: string } }) => {
-  const response = fetchData<ProductResponse>(
-    `products/category/${params.category}`,
-  );
+const PageCategoryProducts = ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) => {
+  const q = searchParams["q"] ?? "";
+  const url = `products/search`;
+  const response = fetchData<ProductResponse>({ url, query: { q } });
   return (
     <div className="space-y-5">
       <Link
-        href={"/"}
+        href={"/store"}
         className="inline-flex items-center gap-2 rounded-lg border px-4 py-2"
       >
         {" "}
         <ChevronLeft size={16} /> Back
       </Link>
-      <h1>Category - {params.category}</h1>
+      <h1>search by - {q}</h1>
 
-      <Suspense fallback={<ProductsLoading />} key={params.category}>
+      <Suspense fallback={<ProductsLoading />} key={q}>
         <Await promise={response}>
-          {({ products }) => {
-            return <ProductList products={products} />;
+          {(data) => {
+            return (
+              <>
+                <InfiniteLoading payload={data} url={url} query={{ q }} />
+              </>
+            );
           }}
         </Await>
       </Suspense>

@@ -15,7 +15,7 @@ export async function sleep(duration = 3000) {
 }
 
 export function queryStringConverter(payload: {
-  [key: string]: string | undefined | null;
+  [key: string]: string | undefined | null | number;
 }) {
   return qs.stringify(payload, { skipEmptyString: true, skipNull: true });
 }

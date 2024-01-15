@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/select";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader } from "lucide-react";
-import { queryStringConverter } from "@/lib/utils";
 
 const CategoryList = ({ categories }: { categories: string[] }) => {
   const searchParams = useSearchParams();
@@ -23,11 +22,11 @@ const CategoryList = ({ categories }: { categories: string[] }) => {
       defaultValue={searchParams.get("category") || ""}
       onValueChange={(value) =>
         setTransition(() => {
-          router.push(`/${value}`);
+          router.push(`/store/${value}`);
         })
       }
     >
-      <SelectTrigger className="w-[280px] focus:ring-0">
+      <SelectTrigger className="w-full focus:ring-0 md:w-[280px]">
         {isPending && <Loader className="animate-spin" />}
         <SelectValue placeholder="Select a Category" />
       </SelectTrigger>

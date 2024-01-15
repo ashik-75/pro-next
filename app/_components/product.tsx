@@ -20,7 +20,12 @@ const ProductCard = ({ product }: { product: Product }) => {
           <h1 className="line-clamp-1 text-xl font-black text-zinc-600 dark:text-zinc-300">
             {product.title}
           </h1>
-          <p>{product.category}</p>
+          <div className="flex justify-between">
+            <p>$ {product.price}</p>
+            <p className="py-.5 rounded-full border px-3 text-sm">
+              {product.category}
+            </p>
+          </div>
         </div>
       </div>
     </Link>
