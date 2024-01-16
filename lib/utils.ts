@@ -6,10 +6,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function sleep(duration = 3000) {
+export async function sleep(duration = 3000, fn?: () => void) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      return resolve("fucked");
+      if (fn) {
+        return resolve(fn());
+      } else {
+        return resolve("fucked");
+      }
     }, duration);
   });
 }

@@ -10,7 +10,6 @@ const MovieSearchBar = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const defaultSearchQueryParams = searchParams.get("q");
-  const page = searchParams.get("page");
 
   const [defaultValue, setDefaultValue] = useState(
     () => defaultSearchQueryParams || "",
@@ -21,7 +20,6 @@ const MovieSearchBar = () => {
 
     const query = queryStringConverter({
       q: value,
-      page: page,
     });
     startTransition(() => {
       if (value) {
