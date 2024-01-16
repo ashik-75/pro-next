@@ -3,6 +3,7 @@ import { Laptop, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import React from "react";
+import MovieSearchBar from "../(movie)/_components/movie-search-bar";
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
@@ -12,6 +13,8 @@ const Navbar = () => {
       <Link href={"/"}>
         <h1 className=" text-3xl font-extrabold">Store Front</h1>
       </Link>
+
+      <MovieSearchBar />
 
       <button
         onClick={() =>

@@ -9,7 +9,7 @@ type BlurImageProps = {
 const BlurImage = ({ url, alt }: BlurImageProps) => {
   const [loaded, setLoaded] = useState(false);
   return (
-    <div className=" relative aspect-video overflow-hidden rounded-3xl">
+    <div className=" aspect-w-3 aspect-h-4 relative overflow-hidden rounded-3xl">
       <Image
         fill
         src={url}

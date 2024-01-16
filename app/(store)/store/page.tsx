@@ -1,4 +1,4 @@
-import ProductList from "@/app/_components/product-list";
+import ProductList from "@/app/(movie)/_components/movie-list";
 import { fetchData } from "@/lib/data";
 import { ProductResponse } from "@/lib/types";
 import React, { Suspense } from "react";
