@@ -1,8 +1,10 @@
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import LocaleFont from "next/font/local";
-import Navbar from "./_components/navbar";
+
 import { ThemeProvider } from "@/provider/theme-provider";
+import Navbar from "@/components/navbar";
 
 const inter = LocaleFont({
   src: "../public/fonts/inter.ttf",
@@ -42,6 +44,7 @@ export default function RootLayout({
             {children}
           </main>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
