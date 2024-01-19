@@ -35,16 +35,11 @@ export default function RootLayout({
       className={`${inter.variable} ${nunito.variable} ${openSans.variable} font-inter`}
     >
       <body className="h-full dark:bg-gray-900">
-        <ThemeProvider>
-          <nav className="fixed left-0 top-0 z-10 h-20 w-full overflow-hidden border-b dark:border-neutral-700">
-            <Navbar />
-          </nav>
+        <nav className="fixed left-0 top-0 z-10 h-20 w-full overflow-hidden border-b dark:border-neutral-700">
+          <Navbar />
+        </nav>
 
-          <main className="mx-auto h-full max-w-5xl px-5 pt-24">
-            {children}
-          </main>
-        </ThemeProvider>
-        <Toaster />
+        <main className="container h-full px-5 pt-24">{children}</main>
       </body>
     </html>
   );

@@ -1,25 +1,48 @@
 import db from "@/lib/db";
-import { revalidatePath, revalidateTag } from "next/cache";
-import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import {
+  revalidateTag,
+  unstable_noStore as noStore,
+  revalidatePath,
+} from "next/cache";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    cookies();
-    const page = 1;
-    const limit = 5;
-    const notes = await db.note.findMany({
-      orderBy: {
-        updatedAt: "desc",
-      },
-      skip: (page - 1) * limit,
-      take: limit,
-    });
+    const searchParams = request.nextUrl.searchParams;
+    const search = searchParams.get("search");
+    const currentPage = Math.max(Number(searchParams.get("page") || 1), 1);
+    const limit = Math.max(Number(searchParams.get("limit") || 1), 5);
+
+    const [notes, count] = await Promise.all([
+      db.note.findMany({
+        where: {
+          title: {
+            contains: search || undefined,
+            mode: "insensitive",
+          },
+        },
+        orderBy: {
+          title: "desc",
+        },
+        take: limit,
+        skip: (currentPage - 1) * limit,
+      }),
+      db.note.count({
+        where: {
+          title: {
+            contains: search || undefined,
+            mode: "insensitive",
+          },
+        },
+      }),
+    ]);
 
     return NextResponse.json({
+      count,
+      page: currentPage,
+      totalPage: Math.ceil(count / limit),
+      limit,
       notes,
-      page: 1,
-      totalPage: notes.length / limit,
     });
   } catch (error) {
     return new NextResponse("Something wrong", { status: 500 });
@@ -34,14 +57,11 @@ export async function POST(req: Request) {
     const note = await db.note.create({
       data: body,
     });
-    console.log({ note });
 
     revalidateTag("notes");
+    revalidatePath("/");
 
-    return NextResponse.json({
-      note,
-      message: "Note Created",
-    });
+    return NextResponse.json(note);
   } catch (error) {
     console.log("[Note Creation]", error);
     return new NextResponse("Something went wrong", { status: 500 });
