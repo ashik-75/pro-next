@@ -10,6 +10,9 @@ export async function GET(
       where: {
         id: Number(params.noteId),
       },
+      include: {
+        category: true,
+      },
     });
 
     if (!note) {

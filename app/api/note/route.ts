@@ -24,6 +24,9 @@ export async function GET(request: NextRequest) {
         orderBy: {
           title: "desc",
         },
+        include: {
+          category: true
+        },
         take: limit,
         skip: (currentPage - 1) * limit,
       }),
