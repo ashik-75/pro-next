@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
           },
         },
         orderBy: {
-          title: "desc",
+          updatedAt: "desc",
         },
         include: {
           category: true

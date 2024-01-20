@@ -5,7 +5,11 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const [categories, count] = await Promise.all([
-      db.category.findMany(),
+      db.category.findMany({
+        orderBy: {
+          updatedAt: "desc",
+        },
+      }),
       db.category.count(),
     ]);
 
