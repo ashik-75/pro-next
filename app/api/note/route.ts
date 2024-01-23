@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
     const [notes, count] = await Promise.all([
       db.note.findMany({
         where: {
-          OR: [
+          AND: [
             {
               title: {
                 contains: search || undefined,
