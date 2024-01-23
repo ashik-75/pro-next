@@ -12,30 +12,53 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get("search");
     const currentPage = Math.max(Number(searchParams.get("page") || 1), 1);
     const limit = Math.max(Number(searchParams.get("limit") || 1), 5);
+    const categoryName = searchParams.get("category");
 
     const [notes, count] = await Promise.all([
       db.note.findMany({
         where: {
-          title: {
-            contains: search || undefined,
-            mode: "insensitive",
-          },
+          OR: [
+            {
+              title: {
+                contains: search || undefined,
+                mode: "insensitive",
+              },
+            },
+            {
+              category: {
+                name: {
+                  contains: categoryName || undefined,
+                },
+              },
+            },
+          ],
         },
         orderBy: {
           updatedAt: "desc",
         },
         include: {
-          category: true
+          category: true,
         },
         take: limit,
         skip: (currentPage - 1) * limit,
       }),
       db.note.count({
         where: {
-          title: {
-            contains: search || undefined,
-            mode: "insensitive",
-          },
+          OR: [
+            {
+              title: {
+                contains: search || undefined,
+                mode: "insensitive",
+              },
+            },
+            {
+              category: {
+                name: {
+                  contains: categoryName || undefined,
+                },
+              },
+            },
+          ],
         },
       }),
     ]);
