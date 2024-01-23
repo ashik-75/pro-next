@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
       }),
       db.note.count({
         where: {
-          OR: [
+          AND: [
             {
               title: {
                 contains: search || undefined,
